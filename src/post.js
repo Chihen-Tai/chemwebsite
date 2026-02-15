@@ -2,7 +2,7 @@
   const posts = Array.isArray(window.POSTS) ? window.POSTS : [];
   const $ = (id) => document.getElementById(id);
 
-  // ---- Theme toggle ----
+  // ---------- Theme ----------
   function applyTheme(mode) {
     const isDark = mode === "dark";
     document.documentElement.classList.toggle("dark", isDark);
@@ -16,7 +16,7 @@
     applyTheme(isDark ? "light" : "dark");
   });
 
-  // topbar search: 回列表並帶 query
+  // ---------- Top search ----------
   $("qTop")?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       const q = encodeURIComponent(e.target.value.trim());
@@ -24,15 +24,7 @@
     }
   });
 
-  // ---- get id ----
-  const params = new URLSearchParams(location.search);
-  const id = params.get("id");
-  const post = posts.find((p) => String(p.id) === String(id)) || null;
-
-  // footer year (可有可無)
-  $("year")?.textContent = new Date().getFullYear();
-
-  // ---- helpers ----
+  // ---------- Utils ----------
   function escapeHtml(s) {
     return String(s ?? "")
       .replaceAll("&", "&amp;")
@@ -48,21 +40,34 @@
     const p = String(path).trim();
     if (!p) return "";
 
+    // data.js 用 ./assets/... （相對 repo root）最穩
     if (p.startsWith("./")) return "../" + encodeURI(p.slice(2));
+
+    // 已經寫 ../ 就照用
     if (p.startsWith("../")) return encodeURI(p);
 
-    // GitHub project pages 不能用 /assets/...（會掉到 domain root）
+    // project pages 禁用 /assets 這種 domain-root 絕對路徑
     if (p.startsWith("/")) return "../" + encodeURI(p.slice(1));
 
     // 其他：當作相對 repo root
     return "../" + encodeURI(p);
   }
 
-  // ---- not found ----
+  // year（可有可無）
+  const yearEl = $("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ---------- Find post ----------
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  const post = posts.find((p) => String(p.id) === String(id)) || null;
+
   if (!post) {
     document.title = "找不到文章";
-    $("postTitle")?.textContent = "找不到這篇文章";
-    $("postBody")?.innerHTML = `
+    const titleNF = $("postTitle");
+    if (titleNF) titleNF.textContent = "找不到這篇文章";
+    const bodyNF = $("postBody");
+    if (bodyNF) bodyNF.innerHTML = `
       <div class="callout">
         <b>錯誤：</b> 文章不存在或連結不正確。<br/>
         請回到列表頁重新點選。
@@ -76,7 +81,7 @@
     return;
   }
 
-  // ---- category label ----
+  // ---------- Meta ----------
   const categoryName =
     ({
       mid: "期中",
@@ -86,7 +91,6 @@
       solution: "解答",
     }[post.category] || "綜合討論");
 
-  // ---- status chip ----
   const statusText =
     ({
       pin: "置頂",
@@ -95,23 +99,30 @@
       "": "一般",
     }[post.status ?? ""] || "一般");
 
-  // ---- Title / meta ----
   document.title = post.title || "文章";
-  $("postTitle")?.textContent = post.title || "（無標題）";
-  $("postAuthor")?.textContent = post.author || "—";
-  $("postTime")?.textContent = post.createdAt || "—";
-  $("heroCategory")?.textContent = categoryName;
-  $("chipStatus")?.textContent = statusText;
+  const postTitleEl = $("postTitle");
+  if (postTitleEl) postTitleEl.textContent = post.title || "（無標題）";
+  const postAuthorEl = $("postAuthor");
+  if (postAuthorEl) postAuthorEl.textContent = post.author || "—";
+  const postTimeEl = $("postTime");
+  if (postTimeEl) postTimeEl.textContent = post.createdAt || "—";
+  const heroCategoryEl = $("heroCategory");
+  if (heroCategoryEl) heroCategoryEl.textContent = categoryName;
+  const heroSubjectEl = $("heroSubject");
+  if (heroSubjectEl) heroSubjectEl.textContent = post.subject || "未設定科目";
+  const chipStatusEl = $("chipStatus");
+  if (chipStatusEl) chipStatusEl.textContent = statusText;
+  const gpEl = $("gp");
+  if (gpEl) gpEl.textContent = String(post.gp ?? 0);
+  const bpEl = $("bp");
+  if (bpEl) bpEl.textContent = String(post.bp ?? 0);
 
-  $("gp")?.textContent = String(post.gp ?? 0);
-  $("bp")?.textContent = String(post.bp ?? 0);
-
-  // ---- attachment ----
+  // ---------- Attachment ----------
   const rawAttachment =
     typeof post.attachment === "string" ? post.attachment.trim() : "";
   const resolvedAttachment = resolveAttachmentPath(rawAttachment);
 
-  // ---- download button ----
+  // download button（可有可無）
   const btn = $("downloadBtn");
   if (btn) {
     if (!resolvedAttachment) {
@@ -126,7 +137,7 @@
     }
   }
 
-  // ---- Body ----
+  // ---------- Body ----------
   const tags = (post.tags || []).map((t) => `#${escapeHtml(t)}`).join("　");
   const subject = post.subject
     ? `<span class="tag">${escapeHtml(post.subject)}</span>`
@@ -151,7 +162,6 @@
 
   const body = post.bodyHtml ? post.bodyHtml : defaultBody;
 
-  // ---- PDF embed ----
   const pdfEmbed = resolvedAttachment
     ? `
       <div class="pdf-actions">
@@ -162,7 +172,16 @@
         <iframe class="pdf-frame" src="${resolvedAttachment}#view=FitH" title="PDF Preview"></iframe>
       </div>
     `
-    : "";
+    : `
+      <div class="callout" style="margin-top:14px;">
+        <b>提示：</b> 這篇沒有設定 attachment，所以不會顯示 PDF。<br/>
+        請到 <span class="kbd">src/data.js</span> 幫這篇加上：
+        <div style="margin-top:8px;">
+          <span class="kbd">attachment: "./assets/xxx.pdf"</span>
+        </div>
+      </div>
+    `;
 
-  $("postBody")?.innerHTML = body + pdfEmbed;
+  const postBodyEl = $("postBody");
+  if (postBodyEl) postBodyEl.innerHTML = body + pdfEmbed;
 })();

@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <!-- Topbar (沿用列表頁風格) -->
     <header class="topbar">
         <div class="wrap inner">
             <a class="brand" href="../index.html">
@@ -31,11 +30,11 @@
         </div>
     </header>
 
-    <!-- Hero (像你截圖那種大封面) -->
     <section class="hero">
         <div class="wrap hero-inner">
             <div class="hero-top">
                 <div class="hero-pill" id="heroCategory">綜合討論</div>
+                <div class="hero-pill" id="heroSubject">科目未設定</div>
             </div>
 
             <div class="hero-title">
@@ -61,11 +60,10 @@
         <div class="hero-cloud" aria-hidden="true"></div>
     </section>
 
-    <!-- Content -->
     <main class="wrap post-wrap">
         <article class="post-card">
             <div class="post-body" id="postBody">
-                <!-- 由 post.js 填入 -->
+                <!-- post.js 會填入 -->
             </div>
         </article>
 
@@ -77,10 +75,46 @@
 
     <footer class="post-footer">
         © Host on GitHub Pages
+        <!-- year 可有可無；有的話 post.js 會填 -->
+        <span id="year" style="display:none;"></span>
     </footer>
 
-    <script src="../src/data.js"></script>
-    <script src="../src/post.js"></script>
+    <script>
+      (function () {
+        const targets = [
+          "../src/data.js?v=1",
+          "../src/post.js?v=1"
+        ];
+
+        const showErr = (src) => {
+          const box = document.createElement("div");
+          box.style.padding = "14px";
+          box.style.margin = "14px 0";
+          box.style.border = "1px solid rgba(255,0,0,.35)";
+          box.style.borderRadius = "12px";
+          box.style.background = "rgba(255,0,0,.06)";
+          box.style.color = "#b00020";
+          box.style.fontFamily = "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto";
+          box.innerHTML = `<b>載入失敗：</b> <span class="kbd">${src}</span><br/><small>請檢查 GitHub Pages 路徑/檔名大小寫，或在 DevTools → Network 看是否 404。</small>`;
+
+          const body = document.getElementById("postBody") || document.body;
+          body.prepend(box);
+        };
+
+        let i = 0;
+        const next = () => {
+          if (i >= targets.length) return;
+          const src = targets[i++];
+          const s = document.createElement("script");
+          s.src = src;
+          s.onload = next;
+          s.onerror = () => showErr(src);
+          document.body.appendChild(s);
+        };
+
+        next();
+      })();
+    </script>
 </body>
 
 </html>

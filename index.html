@@ -24,8 +24,8 @@
             </div>
 
             <div class="top-actions">
-                <a class="btn" href="#about">說明</a>
-                <a class="btn primary" href="#new">新增</a>
+                <button class="btn" id="aboutBtn" type="button">說明</button>
+                <button class="btn primary" id="addBtn" type="button">新增</button>
                 <button class="btn icon" id="themeBtn" title="切換深色/淺色">🌓</button>
             </div>
         </div>
@@ -150,6 +150,53 @@
             © Host on GitHub Pages
         </footer>
     </main>
+
+    <div class="modal" id="aboutModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+        <div class="modal-backdrop" data-close-modal="1"></div>
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3 id="aboutModalTitle">使用說明</h3>
+                <button class="modal-close" id="aboutModalClose" type="button" aria-label="關閉視窗">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="note">
+                    這是考古題整理用的靜態文章列表。<br />
+                    你可以用上方搜尋框找：標題 / 科目 / 作者 / 標籤。<br />
+                    也可以用分類、科目、排序做快速篩選。<br /><br />
+                    快捷鍵：<span class="kbd">/</span> 可快速聚焦搜尋框。
+                </div>
+                <div class="modal-actions">
+                    <button class="btn2" id="aboutModalDismiss" type="button">關閉</button>
+                    <a class="btn2 primary" href="#about" id="aboutModalToBanner">看首頁說明區</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="addModalTitle">
+        <div class="modal-backdrop" data-close-modal="1"></div>
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3 id="addModalTitle">如何新增資料</h3>
+                <button class="modal-close" id="addModalClose" type="button" aria-label="關閉視窗">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="note">
+                    目前列表資料在 <span class="kbd">src/data.js</span> 的 <span class="kbd">window.POSTS</span>。<br />
+                    你可以：
+                    <ol class="note-list">
+                        <li>直接新增一筆物件（最簡單）</li>
+                        <li>link 指向 <span class="kbd">/posts/xxx.html</span> 或 <span class="kbd">/assets/xxx.pdf</span></li>
+                        <li>之後我也可以幫你改成讀 <span class="kbd">data.json</span></li>
+                    </ol>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn2" id="addModalDismiss" type="button">關閉</button>
+                    <a class="btn2 primary" href="#new" id="addModalToCard">看側欄完整說明</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- data first, then app -->
     <script src="./src/data.js"></script>
