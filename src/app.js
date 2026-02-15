@@ -156,21 +156,28 @@
 
     function renderRows(items) {
         elRows.innerHTML = items.map(p => {
+
             const st = statusMap[p.status ?? ""] || statusMap[""];
             const badgeCls = ["badge", st.cls].filter(Boolean).join(" ");
-            const tags = (p.tags || []).slice(0, 4).map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
-            const href = (!p.id)
-                ? ((typeof p.link === "string" && p.link.trim()) ? p.link.trim() : "#")
-                : ((typeof p.link === "string" && p.link.trim() && p.link.trim() !== "#")
-                    ? p.link.trim()
-                    : `./posts/post.html?id=${encodeURIComponent(p.id)}`);
+            const tags = (p.tags || [])
+                .slice(0, 4)
+                .map(t => `<span class="tag">#${escapeHtml(t)}</span>`)
+                .join("");
+
+            // ⭐ 重點：永遠連到 post.html
+            const href = p.id
+                ? `./posts/post.html?id=${encodeURIComponent(p.id)}`
+                : "#";
+
             return `
         <div class="row">
           <div><span class="${badgeCls}">${st.text}</span></div>
 
           <div class="title">
-            
-            <a href="${href}" title="${escapeHtml(p.title)}">${escapeHtml(p.title)}</a>
+            <a href="${href}" title="${escapeHtml(p.title)}">
+              ${escapeHtml(p.title)}
+            </a>
+
             <div class="sub">
               <span class="tag">${escapeHtml(p.subject)}</span>
               ${tags}
@@ -187,11 +194,17 @@
           </div>
 
           <div class="last">
-            <div><a href="${href}">${escapeHtml(p.lastReplyBy)}</a></div>
-            <time datetime="${(p.lastReplyAt || "").replace(" ", "T")}">${escapeHtml(p.lastReplyAt)}</time>
+            <div>
+              <a href="${href}">
+                ${escapeHtml(p.lastReplyBy)}
+              </a>
+            </div>
+            <time datetime="${(p.lastReplyAt || "").replace(" ", "T")}">
+              ${escapeHtml(p.lastReplyAt)}
+            </time>
           </div>
         </div>
-      `;
+        `;
         }).join("");
     }
 

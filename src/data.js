@@ -1,8 +1,8 @@
 // 你之後就一直往這個陣列加資料就好。
-// link 可指向：
-// 1) 文章頁：./posts/xxx.html
-// 2) PDF：  ./assets/xxx.pdf
-// 3) 外部連結：https://...
+// attachment 可指向：
+// 1) PDF：  ./化學系必修/普通化學/xxx.pdf
+// 2) 其他檔案
+// ⚠️ 若路徑包含中文或空格，請使用 encodeURI()
 
 window.POSTS = [
     {
@@ -18,7 +18,7 @@ window.POSTS = [
         createdAt: "2025-12-20",
         lastReplyAt: "2026-02-14 11:52",
         lastReplyBy: "marcopolo",
-        link: "#"
+        attachment: ""
     },
     {
         id: "ss-112-mid-solution",
@@ -33,7 +33,7 @@ window.POSTS = [
         createdAt: "2026-01-08",
         lastReplyAt: "2026-02-13 03:27",
         lastReplyBy: "js901020",
-        link: "#"
+        attachment: ""
     },
     {
         id: "pchem-2022-final",
@@ -48,7 +48,7 @@ window.POSTS = [
         createdAt: "2025-11-03",
         lastReplyAt: "2026-02-12 22:02",
         lastReplyBy: "mole2160985",
-        link: "#"
+        attachment: ""
     },
     {
         id: "oc-usc-2023-grad",
@@ -63,7 +63,7 @@ window.POSTS = [
         createdAt: "2026-02-09",
         lastReplyAt: "2026-02-14 09:10",
         lastReplyBy: "f622230208",
-        link: "#"
+        attachment: ""
     },
     {
         id: "la-ntu-notes",
@@ -78,6 +78,6 @@ window.POSTS = [
         createdAt: "2026-02-10",
         lastReplyAt: "2026-02-10 08:44",
         lastReplyBy: "a37601416",
-        link: "#"
+        attachment: "./assets/general_chem/101.pdf"
     }
 ];
