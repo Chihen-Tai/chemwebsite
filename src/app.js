@@ -15,6 +15,7 @@
         const state = {
             tab: "all",
             q: "",
+            department: "",
             subject: "",
             sort: "latest",
             page: 1,
@@ -38,6 +39,8 @@
         const addModalClose = $("addModalClose");
         const addModalDismiss = $("addModalDismiss");
         const addModalToCard = $("addModalToCard");
+        const departmentSel = $("department");
+        const subjectSel = $("subject");
 
         // ---- Theme toggle (class-based + persistence) ----
         const themeBtn = $("themeBtn");
@@ -129,11 +132,26 @@
             }
         });
 
-        // ---- Subject options (auto from data) ----
-        const subjectSel = $("subject");
-        if (subjectSel) {
-            const subjects = [...new Set(posts.map(p => p.subject).filter(Boolean))]
-                .sort((a, b) => a.localeCompare(b, "zh-Hant"));
+        // ---- Department -> Subject cascade ----
+        function getSubjectsByDepartment(department) {
+            return [...new Set(
+                posts
+                    .filter((p) => !department || p.department === department)
+                    .map((p) => p.subject)
+                    .filter(Boolean)
+            )].sort((a, b) => a.localeCompare(b, "zh-Hant"));
+        }
+
+        function rebuildSubjectOptions(department) {
+            if (!subjectSel) return;
+            const subjects = getSubjectsByDepartment(department);
+            subjectSel.innerHTML = "";
+
+            const allOpt = document.createElement("option");
+            allOpt.value = "";
+            allOpt.textContent = "全部科目";
+            subjectSel.appendChild(allOpt);
+
             for (const s of subjects) {
                 const opt = document.createElement("option");
                 opt.value = s;
@@ -141,11 +159,26 @@
                 subjectSel.appendChild(opt);
             }
 
+            subjectSel.disabled = subjects.length === 0;
+        }
+
+        if (departmentSel) {
+            departmentSel.addEventListener("change", (e) => {
+                state.department = e.target.value;
+                state.subject = "";
+                state.page = 1;
+                rebuildSubjectOptions(state.department);
+                render();
+            });
+        }
+
+        if (subjectSel) {
             subjectSel.addEventListener("change", (e) => {
                 state.subject = e.target.value;
                 state.page = 1;
                 render();
             });
+            rebuildSubjectOptions("");
         }
 
         $("sort")?.addEventListener("change", (e) => {
@@ -186,10 +219,11 @@
         function filterPosts() {
             return posts.filter(p => {
                 if (state.tab !== "all" && p.category !== state.tab) return false;
+                if (state.department && p.department !== state.department) return false;
                 if (state.subject && p.subject !== state.subject) return false;
 
                 if (state.q) {
-                    const hay = [p.title, p.subject, p.author, ...(p.tags || [])].join(" ").toLowerCase();
+                    const hay = [p.title, p.department, p.subject, p.author, ...(p.tags || [])].join(" ").toLowerCase();
                     if (!hay.includes(state.q.toLowerCase())) return false;
                 }
                 return true;
