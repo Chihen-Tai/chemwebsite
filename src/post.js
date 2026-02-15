@@ -130,6 +130,27 @@
     .map((x) => resolveAttachmentPath(x))
     .filter(Boolean);
   const hasAttachment = resolvedAttachments.length > 0;
+  const attachmentCards = hasAttachment
+    ? resolvedAttachments
+      .map((path, idx) => {
+        const name = escapeHtml(getFileName(path));
+        const previewId = `pdfPreview${idx + 1}`;
+        return `
+          <div class="callout attachment-card">
+            <div class="attachment-title">附件 ${idx + 1}：<b>${name}</b></div>
+            <div class="pdf-preview" id="${previewId}">
+              <iframe class="pdf-frame in-card" src="${path}#view=FitH" title="PDF Preview ${idx + 1}"></iframe>
+            </div>
+            <div class="links">
+              <button class="a pdf-toggle" type="button" data-target="${previewId}" aria-expanded="false">⤢ 展開 PDF</button>
+              <a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟 ${name}</a>
+              <a class="a" href="${path}" download>⬇️ 下載 ${name}</a>
+            </div>
+          </div>
+        `;
+      })
+      .join("")
+    : "";
 
   // ---------- Body ----------
   const tags = (post.tags || []).map((t) => `#${escapeHtml(t)}`).join("　");
@@ -137,33 +158,8 @@
     ? `<a class="tag search-trigger" href="../index.html?q=${encodeURIComponent(post.subject)}">${escapeHtml(post.subject)}</a>`
     : "未設定科目";
 
-  const defaultBody = `
-    <h2>簡介</h2>
-    <p>這裡是 <b>${escapeHtml(post.author || "—")}</b> 整理的資料頁。</p>
-
-    <div class="callout">
-      <p class="muted" style="margin:0;">
-        科目：${subject}<br/>
-        標籤：<span class="muted">${escapeHtml(tags || "（無）")}</span>
-      </p>
-
-      <div class="links">
-        ${resolvedAttachments.map((path) => `<a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟 ${escapeHtml(getFileName(path))}</a>`).join("")}
-        ${resolvedAttachments.map((path) => `<a class="a" href="${path}" download>⬇️ 下載 ${escapeHtml(getFileName(path))}</a>`).join("")}
-        <a class="a" href="../index.html">📚 回文章列表</a>
-      </div>
-    </div>
-  `;
-
-  const body = post.bodyHtml ? post.bodyHtml : defaultBody;
-
-  const pdfEmbed = hasAttachment
-    ? resolvedAttachments.map((path, idx) => `
-      <div class="pdf-embed">
-        <div class="muted" style="padding:0 2px 6px;">PDF ${idx + 1}：${escapeHtml(getFileName(path))}</div>
-        <iframe class="pdf-frame" src="${path}#view=FitH" title="PDF Preview ${idx + 1}"></iframe>
-      </div>
-    `).join("")
+  const attachmentSection = hasAttachment
+    ? attachmentCards
     : `
       <div class="callout" style="margin-top:14px;">
         <b>提示：</b> 這篇沒有設定 attachment / attachments，所以不會顯示 PDF。<br/>
@@ -174,6 +170,41 @@
       </div>
     `;
 
+  const defaultBody = `
+    <h2>簡介</h2>
+    <p>這裡是 <b>${escapeHtml(post.author || "—")}</b> 整理的資料頁。</p>
+
+    <div class="callout">
+      <p class="muted" style="margin:0;">
+        科目：${subject}<br/>
+        標籤：<span class="muted">${escapeHtml(tags || "（無）")}</span>
+      </p>
+    </div>
+
+    ${attachmentSection}
+
+    <div class="callout">
+      <div class="links" style="margin-top:0;">
+        <a class="a" href="../index.html">📚 回文章列表</a>
+      </div>
+    </div>
+  `;
+
+  const body = post.bodyHtml ? post.bodyHtml : defaultBody;
+
   const postBodyEl = $("postBody");
-  if (postBodyEl) postBodyEl.innerHTML = body + pdfEmbed;
+  if (postBodyEl) {
+    postBodyEl.innerHTML = body;
+    postBodyEl.querySelectorAll(".pdf-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.getAttribute("data-target");
+        if (!targetId) return;
+        const panel = document.getElementById(targetId);
+        if (!panel) return;
+        const expanded = panel.classList.toggle("expanded");
+        btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+        btn.textContent = expanded ? "⤡ 收合 PDF" : "⤢ 展開 PDF";
+      });
+    });
+  }
 })();

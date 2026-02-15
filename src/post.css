@@ -234,6 +234,30 @@ html.dark .hero-cloud {
     margin: 14px 0;
 }
 
+.attachment-card .attachment-title {
+    margin: 0 0 8px;
+    color: var(--muted);
+}
+
+.pdf-preview {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--panel);
+}
+
+.pdf-preview .pdf-frame.in-card {
+    width: 100%;
+    height: 220px;
+    border: 0;
+    display: block;
+    transition: height .2s ease;
+}
+
+.pdf-preview.expanded .pdf-frame.in-card {
+    height: min(72vh, 860px);
+}
+
 .links {
     display: flex;
     flex-wrap: wrap;
@@ -296,11 +320,6 @@ html.dark .hero-cloud {
     max-height: 820px;
     border: 0;
     display: block;
-}
-
-.pdf-embed {
-    width: min(920px, 100%);
-    margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
