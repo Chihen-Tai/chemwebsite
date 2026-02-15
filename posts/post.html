@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>文章</title>
+    <meta name="description" content="考古題文章頁" />
+    <link rel="stylesheet" href="../src/styles.css" />
+    <link rel="stylesheet" href="../src/post.css" />
+</head>
+
+<body>
+    <!-- Topbar (沿用列表頁風格) -->
+    <header class="topbar">
+        <div class="wrap inner">
+            <a class="brand" href="../index.html">
+                <div class="logo">Q</div>
+                <div>清大化學考古題</div>
+            </a>
+
+            <div class="search" title="回列表搜尋">
+                <span aria-hidden="true">🔎</span>
+                <input id="qTop" type="search" placeholder="回列表頁搜尋…" />
+            </div>
+
+            <div class="top-actions">
+                <a class="btn" href="../index.html">回列表</a>
+                <button class="btn icon" id="themeBtn" title="切換深色/淺色">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero (像你截圖那種大封面) -->
+    <section class="hero">
+        <div class="wrap hero-inner">
+            <div class="hero-top">
+                <div class="hero-pill" id="heroCategory">綜合討論</div>
+            </div>
+
+            <div class="hero-title">
+                <h1 id="postTitle">載入中…</h1>
+            </div>
+
+            <div class="hero-meta">
+                <div class="meta-left">
+                    <span class="meta-badge" id="authorBadge">樓主</span>
+                    <span class="meta-author" id="postAuthor">—</span>
+                    <span class="meta-dot">·</span>
+                    <time id="postTime">—</time>
+                </div>
+
+                <div class="meta-right">
+                    <span class="chip" id="chipStatus">一般</span>
+                    <span class="chip">GP <b id="gp">0</b></span>
+                    <span class="chip">BP <b id="bp">0</b></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-cloud" aria-hidden="true"></div>
+    </section>
+
+    <!-- Content -->
+    <main class="wrap post-wrap">
+        <article class="post-card">
+            <div class="post-body" id="postBody">
+                <!-- 由 post.js 填入 -->
+            </div>
+        </article>
+
+        <div class="post-actions">
+            <a class="btn2" href="../index.html">← 回文章列表</a>
+            <a class="btn2 primary" id="downloadBtn" href="#" target="_blank" rel="noopener">下載附件</a>
+        </div>
+    </main>
+
+    <footer class="post-footer">
+        © <span id="year"></span> 考古題資料庫
+    </footer>
+
+    <script src="../src/data.js"></script>
+    <script src="../src/post.js"></script>
+</body>
+
+</html>
