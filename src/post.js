@@ -130,21 +130,27 @@
     .map((x) => resolveAttachmentPath(x))
     .filter(Boolean);
   const hasAttachment = resolvedAttachments.length > 0;
+  const postYear = /^\d{4}/.test(String(post.createdAt || ""))
+    ? String(post.createdAt).slice(0, 4)
+    : "未知年份";
   const attachmentCards = hasAttachment
     ? resolvedAttachments
       .map((path, idx) => {
         const name = escapeHtml(getFileName(path));
-        const previewId = `pdfPreview${idx + 1}`;
+        const panelId = `pdfInline${idx + 1}`;
         return `
-          <div class="callout attachment-card">
-            <div class="attachment-title">附件 ${idx + 1}：<b>${name}</b></div>
-            <div class="pdf-preview" id="${previewId}">
-              <iframe class="pdf-frame in-card" src="${path}#view=FitH" title="PDF Preview ${idx + 1}"></iframe>
-            </div>
-            <div class="links">
-              <button class="a pdf-toggle" type="button" data-target="${previewId}" aria-expanded="false">⤢ 展開 PDF</button>
-              <a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟 ${name}</a>
-              <a class="a" href="${path}" download>⬇️ 下載 ${name}</a>
+          <div class="attachment-block">
+            <div class="callout attachment-card">
+              <div class="attachment-title">附件 ${idx + 1}：<b>${name}</b></div>
+              <div class="attachment-year">年份：<b>${escapeHtml(postYear)}</b></div>
+              <div class="attachment-actions">
+                <a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟</a>
+                <a class="a" href="${path}" download>⬇️ 下載</a>
+                <button class="btn2 primary pdf-toggle-inline" type="button" data-target="${panelId}" aria-expanded="false">⤢ 點擊預覽</button>
+              </div>
+              <div class="pdf-inline-panel" id="${panelId}" hidden>
+                <iframe class="pdf-inline-frame" src="${path}#view=FitH" title="PDF ${idx + 1}"></iframe>
+              </div>
             </div>
           </div>
         `;
@@ -195,16 +201,25 @@
   const postBodyEl = $("postBody");
   if (postBodyEl) {
     postBodyEl.innerHTML = body;
-    postBodyEl.querySelectorAll(".pdf-toggle").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.getAttribute("data-target");
-        if (!targetId) return;
-        const panel = document.getElementById(targetId);
-        if (!panel) return;
-        const expanded = panel.classList.toggle("expanded");
-        btn.setAttribute("aria-expanded", expanded ? "true" : "false");
-        btn.textContent = expanded ? "⤡ 收合 PDF" : "⤢ 展開 PDF";
-      });
+    postBodyEl.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      const btn = target.closest(".pdf-toggle-inline");
+      if (!btn) return;
+      const targetId = btn.getAttribute("data-target");
+      if (!targetId) return;
+      const panel = document.getElementById(targetId);
+      if (!panel) return;
+      const willExpand = panel.hasAttribute("hidden");
+      if (willExpand) {
+        panel.removeAttribute("hidden");
+        panel.classList.add("expanded");
+      } else {
+        panel.setAttribute("hidden", "");
+        panel.classList.remove("expanded");
+      }
+      btn.setAttribute("aria-expanded", willExpand ? "true" : "false");
+      btn.textContent = willExpand ? "⤡ 點擊收合" : "⤢ 點擊預覽";
     });
   }
 })();
