@@ -237,7 +237,7 @@ html.dark .hero-cloud {
 .attachment-card .attachment-title {
     margin: 0 0 8px;
     color: var(--muted);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -251,8 +251,8 @@ html.dark .hero-cloud {
 
 .attachment-year {
     color: var(--muted);
-    margin-bottom: 10px;
-    font-size: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .attachment-actions {
@@ -261,25 +261,73 @@ html.dark .hero-cloud {
     gap: 10px;
 }
 
+.pdf-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+    color: var(--brand2);
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background .16s ease, transform .16s ease;
+    margin-top: 12px;
+}
+
+.pdf-summary:hover {
+    background: var(--subtle);
+    transform: translateY(-1px);
+}
+
 .pdf-inline-panel {
     display: none;
-    height: 90vh;
-    margin-top: 16px;
+    margin-top: 12px;
     border: 1px solid var(--line);
     border-radius: 16px;
     overflow: hidden;
     background: var(--panel);
-}
-
-.pdf-inline-panel.expanded {
-    display: block;
+    -webkit-overflow-scrolling: touch;
 }
 
 .pdf-inline-frame {
     width: 100%;
     height: 100%;
+    min-height: 560px;
     border: 0;
     display: block;
+}
+
+.pdf-inline-panel:not([hidden]) {
+    display: block;
+    height: min(76vh, 980px);
+}
+
+@media (max-width: 760px) {
+    .pdf-inline-panel:not([hidden]) {
+        height: 62vh;
+    }
+
+    .pdf-inline-frame {
+        min-height: 420px;
+    }
+}
+
+/* Safari/iOS fallback */
+@supports (-webkit-touch-callout: none) {
+    .pdf-inline-panel:not([hidden]) {
+        height: 68svh;
+        min-height: 460px;
+    }
+
+    .pdf-inline-frame {
+        min-height: 460px;
+        transform: translateZ(0);
+    }
 }
 
 .links {

@@ -146,8 +146,10 @@
               <div class="attachment-actions">
                 <a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟</a>
                 <a class="a" href="${path}" download>⬇️ 下載</a>
-                <button class="btn2 primary pdf-toggle-inline" type="button" data-target="${panelId}" aria-expanded="false">⤢ 點擊預覽</button>
               </div>
+              <button class="pdf-summary pdf-toggle-inline" type="button" data-target="${panelId}" aria-expanded="false">
+                ⤢ 點擊預覽 / 收合
+              </button>
               <div class="pdf-inline-panel" id="${panelId}" hidden>
                 <iframe class="pdf-inline-frame" src="${path}#view=FitH" title="PDF ${idx + 1}"></iframe>
               </div>
@@ -206,20 +208,14 @@
       if (!(target instanceof Element)) return;
       const btn = target.closest(".pdf-toggle-inline");
       if (!btn) return;
-      const targetId = btn.getAttribute("data-target");
-      if (!targetId) return;
-      const panel = document.getElementById(targetId);
+      const panelId = btn.getAttribute("data-target");
+      if (!panelId) return;
+      const panel = document.getElementById(panelId);
       if (!panel) return;
-      const willExpand = panel.hasAttribute("hidden");
-      if (willExpand) {
-        panel.removeAttribute("hidden");
-        panel.classList.add("expanded");
-      } else {
-        panel.setAttribute("hidden", "");
-        panel.classList.remove("expanded");
-      }
-      btn.setAttribute("aria-expanded", willExpand ? "true" : "false");
-      btn.textContent = willExpand ? "⤡ 點擊收合" : "⤢ 點擊預覽";
+      const willOpen = panel.hasAttribute("hidden");
+      if (willOpen) panel.removeAttribute("hidden");
+      else panel.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
     });
   }
 })();
