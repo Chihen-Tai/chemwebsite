@@ -78,6 +78,6 @@ window.POSTS = [
         createdAt: "2026-02-10",
         lastReplyAt: "2026-02-10 08:44",
         lastReplyBy: "a37601416",
-        attachment: "./assets/general_chem/101.pdf"
+        attachment: "chemwebsite/assets/general_chem/101.pdf"
     }
 ];
