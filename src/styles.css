@@ -344,7 +344,7 @@ html.dark .topbar {
 /* List */
 .list-head {
     display: grid;
-    grid-template-columns: 86px 1fr 160px 140px;
+    grid-template-columns: 86px 1fr;
     gap: 10px;
     padding: 10px 12px;
     font-size: 12px;
@@ -355,7 +355,7 @@ html.dark .topbar {
 
 @media (max-width: 760px) {
     .list-head {
-        grid-template-columns: 70px 1fr 120px;
+        grid-template-columns: 70px 1fr;
     }
 
     .list-head .hide-sm {
@@ -365,7 +365,7 @@ html.dark .topbar {
 
 .row {
     display: grid;
-    grid-template-columns: 86px 1fr 160px 140px;
+    grid-template-columns: 86px 1fr;
     gap: 10px;
     padding: 12px;
     border-bottom: 1px solid var(--line);
@@ -393,7 +393,7 @@ html.dark .topbar {
 
 @media (max-width: 760px) {
     .row {
-        grid-template-columns: 70px 1fr 120px;
+        grid-template-columns: 70px 1fr;
     }
 
     .row .hide-sm {

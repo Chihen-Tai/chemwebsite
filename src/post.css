@@ -109,6 +109,20 @@ html.dark .hero {
     font-weight: 800;
 }
 
+.search-trigger {
+    cursor: pointer;
+}
+
+.search-trigger:hover {
+    text-decoration: underline;
+}
+
+.search-trigger:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, .85);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
 .meta-dot {
     opacity: .8
 }
@@ -143,6 +157,7 @@ html.dark .hero {
     right: 0;
     bottom: -1px;
     height: 56px;
+    pointer-events: none;
     background:
         radial-gradient(45px 35px at 8% 60%, #fff 98%, transparent 100%),
         radial-gradient(55px 40px at 20% 70%, #fff 98%, transparent 100%),

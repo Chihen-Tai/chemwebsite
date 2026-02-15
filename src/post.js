@@ -16,14 +16,6 @@
     applyTheme(isDark ? "light" : "dark");
   });
 
-  // ---------- Top search ----------
-  $("qTop")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      const q = encodeURIComponent(e.target.value.trim());
-      window.location.href = `../index.html?q=${q}`;
-    }
-  });
-
   // ---------- Utils ----------
   function escapeHtml(s) {
     return String(s ?? "")
@@ -32,6 +24,19 @@
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
+  }
+
+  function renderSearchLink(el, keyword, label, emptyText = "—") {
+    const q = String(keyword || "").trim();
+    if (!el) return;
+    if (!q) {
+      el.textContent = emptyText;
+      el.setAttribute("href", "../index.html");
+      return;
+    }
+    el.textContent = q;
+    el.setAttribute("href", `../index.html?q=${encodeURIComponent(q)}`);
+    if (label) el.setAttribute("aria-label", label);
   }
 
   // post.html 在 /posts/，把 attachment 轉成可用路徑（並 encode）
@@ -103,19 +108,15 @@
   const postTitleEl = $("postTitle");
   if (postTitleEl) postTitleEl.textContent = post.title || "（無標題）";
   const postAuthorEl = $("postAuthor");
-  if (postAuthorEl) postAuthorEl.textContent = post.author || "—";
+  renderSearchLink(postAuthorEl, post.author, `搜尋作者 ${post.author || ""}`, "—");
   const postTimeEl = $("postTime");
   if (postTimeEl) postTimeEl.textContent = post.createdAt || "—";
   const heroCategoryEl = $("heroCategory");
   if (heroCategoryEl) heroCategoryEl.textContent = categoryName;
   const heroSubjectEl = $("heroSubject");
-  if (heroSubjectEl) heroSubjectEl.textContent = post.subject || "未設定科目";
+  renderSearchLink(heroSubjectEl, post.subject, `搜尋科目 ${post.subject || ""}`, "未設定科目");
   const chipStatusEl = $("chipStatus");
   if (chipStatusEl) chipStatusEl.textContent = statusText;
-  const gpEl = $("gp");
-  if (gpEl) gpEl.textContent = String(post.gp ?? 0);
-  const bpEl = $("bp");
-  if (bpEl) bpEl.textContent = String(post.bp ?? 0);
 
   // ---------- Attachment ----------
   const rawAttachment =
@@ -140,8 +141,8 @@
   // ---------- Body ----------
   const tags = (post.tags || []).map((t) => `#${escapeHtml(t)}`).join("　");
   const subject = post.subject
-    ? `<span class="tag">${escapeHtml(post.subject)}</span>`
-    : "";
+    ? `<a class="tag search-trigger" href="../index.html?q=${encodeURIComponent(post.subject)}">${escapeHtml(post.subject)}</a>`
+    : "未設定科目";
 
   const defaultBody = `
     <h2>簡介</h2>

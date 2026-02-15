@@ -27,7 +27,6 @@
         const elPager = $("pager");
         const elYear = $("year");
         const elTopAuthors = $("topAuthors");
-        const qTop = $("qTop");
         const q = $("q");
         const aboutBtn = $("aboutBtn");
         const aboutModal = $("aboutModal");
@@ -60,13 +59,19 @@
         // ---- Search sync ----
         function setQuery(v) {
             state.q = (v || "").trim();
-            if (qTop) qTop.value = state.q;
             if (q) q.value = state.q;
             state.page = 1;
             render();
         }
-        qTop?.addEventListener("input", (e) => setQuery(e.target.value));
         q?.addEventListener("input", (e) => setQuery(e.target.value));
+
+        // init query from URL: /index.html?q=xxx
+        const initParams = new URLSearchParams(window.location.search);
+        const initQ = (initParams.get("q") || "").trim();
+        if (initQ) {
+            state.q = initQ;
+            if (q) q.value = initQ;
+        }
 
         // ---- Add modal ----
         function openModal(modalEl, closeFocusEl) {
@@ -253,22 +258,6 @@
                   <span>·</span>
                   <span>${escapeHtml(p.createdAt)}</span>
                 </div>
-              </div>
-
-              <div class="stat hide-sm">
-                <div><strong>${fmtNum(p.replies)}</strong> 回覆</div>
-                <div><strong>${fmtNum(p.views)}</strong> 瀏覽</div>
-              </div>
-
-              <div class="last">
-                <div>
-                  <a href="${href}">
-                    ${escapeHtml(p.lastReplyBy)}
-                  </a>
-                </div>
-                <time datetime="${(p.lastReplyAt || "").replace(" ", "T")}">
-                  ${escapeHtml(p.lastReplyAt)}
-                </time>
               </div>
             </div>
             `;
