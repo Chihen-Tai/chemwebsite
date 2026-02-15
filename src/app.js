@@ -276,6 +276,6 @@
     }
 
     // init
-    elYear.textContent = new Date().getFullYear();
+    if (elYear) elYear.textContent = new Date().getFullYear();
     render();
 })();
