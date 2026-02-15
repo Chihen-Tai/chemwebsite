@@ -29,8 +29,7 @@
   const id = params.get("id");
   const post = posts.find(p => String(p.id) === String(id)) || null;
 
-  $("year").textContent = new Date().getFullYear();
-
+  $("year")?.textContent = new Date().getFullYear();
   if (!post) {
     document.title = "找不到文章";
     $("postTitle").textContent = "找不到這篇文章";
