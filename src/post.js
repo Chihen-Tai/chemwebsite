@@ -58,6 +58,12 @@
     return "../" + encodeURI(p);
   }
 
+  function getFileName(path) {
+    const clean = String(path || "").split("#")[0].split("?")[0];
+    const seg = clean.split("/");
+    return decodeURIComponent(seg[seg.length - 1] || "附件");
+  }
+
   // year（可有可無）
   const yearEl = $("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -81,8 +87,6 @@
         </div>
       </div>
     `;
-    const btnNF = $("downloadBtn");
-    if (btnNF?.style) btnNF.style.display = "none";
     return;
   }
 
@@ -119,24 +123,13 @@
   if (chipStatusEl) chipStatusEl.textContent = statusText;
 
   // ---------- Attachment ----------
-  const rawAttachment =
-    typeof post.attachment === "string" ? post.attachment.trim() : "";
-  const resolvedAttachment = resolveAttachmentPath(rawAttachment);
-
-  // download button（可有可無）
-  const btn = $("downloadBtn");
-  if (btn) {
-    if (!resolvedAttachment) {
-      btn.textContent = "沒有附件";
-      btn.classList.remove("primary");
-      btn.style.pointerEvents = "none";
-      btn.style.opacity = "0.6";
-      btn.href = "#";
-    } else {
-      btn.textContent = "下載附件";
-      btn.href = resolvedAttachment;
-    }
-  }
+  const rawAttachments = Array.isArray(post.attachments)
+    ? post.attachments
+    : (typeof post.attachment === "string" && post.attachment.trim() ? [post.attachment] : []);
+  const resolvedAttachments = rawAttachments
+    .map((x) => resolveAttachmentPath(x))
+    .filter(Boolean);
+  const hasAttachment = resolvedAttachments.length > 0;
 
   // ---------- Body ----------
   const tags = (post.tags || []).map((t) => `#${escapeHtml(t)}`).join("　");
@@ -155,7 +148,8 @@
       </p>
 
       <div class="links">
-        ${resolvedAttachment ? `<a class="a" href="${resolvedAttachment}" target="_blank" rel="noopener">📄 在新分頁開啟</a>` : ""}
+        ${resolvedAttachments.map((path) => `<a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟 ${escapeHtml(getFileName(path))}</a>`).join("")}
+        ${resolvedAttachments.map((path) => `<a class="a" href="${path}" download>⬇️ 下載 ${escapeHtml(getFileName(path))}</a>`).join("")}
         <a class="a" href="../index.html">📚 回文章列表</a>
       </div>
     </div>
@@ -163,22 +157,19 @@
 
   const body = post.bodyHtml ? post.bodyHtml : defaultBody;
 
-  const pdfEmbed = resolvedAttachment
-    ? `
-      <div class="pdf-actions">
-        <a class="a" href="${resolvedAttachment}" target="_blank" rel="noopener">📄 在新分頁開啟</a>
-        <a class="a" href="${resolvedAttachment}" download>⬇️ 下載 PDF</a>
-      </div>
+  const pdfEmbed = hasAttachment
+    ? resolvedAttachments.map((path, idx) => `
       <div class="pdf-embed">
-        <iframe class="pdf-frame" src="${resolvedAttachment}#view=FitH" title="PDF Preview"></iframe>
+        <div class="muted" style="padding:0 2px 6px;">PDF ${idx + 1}：${escapeHtml(getFileName(path))}</div>
+        <iframe class="pdf-frame" src="${path}#view=FitH" title="PDF Preview ${idx + 1}"></iframe>
       </div>
-    `
+    `).join("")
     : `
       <div class="callout" style="margin-top:14px;">
-        <b>提示：</b> 這篇沒有設定 attachment，所以不會顯示 PDF。<br/>
+        <b>提示：</b> 這篇沒有設定 attachment / attachments，所以不會顯示 PDF。<br/>
         請到 <span class="kbd">src/data.js</span> 幫這篇加上：
         <div style="margin-top:8px;">
-          <span class="kbd">attachment: "./assets/xxx.pdf"</span>
+          <span class="kbd">attachments: ["./assets/101.pdf","./assets/102.pdf"]</span>
         </div>
       </div>
     `;

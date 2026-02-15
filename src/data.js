@@ -2,6 +2,7 @@
 // attachment 可指向：
 // 1) PDF：  ./化學系必修/普通化學/xxx.pdf
 // 2) 其他檔案
+// 也支援 attachments: ["./a.pdf","./b.pdf"]（同一篇多檔）
 // ⚠️ 若路徑包含中文或空格，請使用 encodeURI()
 
 window.POSTS = [
@@ -18,7 +19,10 @@ window.POSTS = [
         createdAt: "2025-12-20",
         lastReplyAt: "2026-02-14 11:52",
         lastReplyBy: "marcopolo",
-        attachment: "./assets/general_chem/101.pdf"
+        attachments: [
+            "./assets/general_chem/101.pdf",
+            "./assets/general_chem/102.pdf"
+        ]
     },
     {
         id: "ss-112-mid-solution",

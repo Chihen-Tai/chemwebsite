@@ -259,14 +259,6 @@ html.dark .hero-cloud {
     transform: translateY(-1px);
 }
 
-.post-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-    margin-top: 12px;
-    flex-wrap: wrap;
-}
-
 .btn2 {
     display: inline-flex;
     align-items: center;
@@ -300,9 +292,15 @@ html.dark .hero-cloud {
 
 .pdf-frame {
     width: 100%;
-    height: 80vh;
+    height: 68vh;
+    max-height: 820px;
     border: 0;
     display: block;
+}
+
+.pdf-embed {
+    width: min(920px, 100%);
+    margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
