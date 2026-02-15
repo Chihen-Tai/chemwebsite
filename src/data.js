@@ -18,7 +18,7 @@ window.POSTS = [
         createdAt: "2025-12-20",
         lastReplyAt: "2026-02-14 11:52",
         lastReplyBy: "marcopolo",
-        attachment: ""
+        attachment: "./assets/general_chem/101.pdf"
     },
     {
         id: "ss-112-mid-solution",

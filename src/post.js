@@ -155,7 +155,9 @@
 
     // / 開頭（少見）保留
     if (path.startsWith("/")) {
-      return encodeURI(path);
+      // GitHub project pages 不能用 /assets/...（會掉到 domain root）
+      // 把 /xxx 轉成 ../xxx
+      return "../" + encodeURI(path.slice(1));
     }
 
     // 其他情況：當作相對 root
