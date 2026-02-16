@@ -168,5 +168,46 @@ window.POSTS = [
         lastReplyAt: "2026-02-14 07:50",
         lastReplyBy: "rachel",
         attachment: ""
+    },
+    {
+        id: "calculator-stat-tutorial-2026",
+        status: "new",
+        category: "notes",
+        department: "通識課",
+        subject: "計算機統計",
+        title: "【教學】計算機統計功能教學（平均值 / 標準差 / 線性回歸）",
+        tags: ["教學", "計算機", "統計"],
+        author: "allen",
+        replies: 0,
+        views: 120,
+        createdAt: "2026-02-16",
+        lastReplyAt: "2026-02-16 20:10",
+        lastReplyBy: "allen",
+        attachment: "./assets/calculate_pratice/calculator_statistics_practice.pdf"
+    },
+    {
+        id: "analytical-chem-1-first-archive",
+        status: "new",
+        category: "mid1",
+        department: "化學系",
+        subject: "分析化學一",
+        title: "【期中一】分析化學一 first 歷年題庫整理（陳貴通）",
+        tags: ["分析化學一", "first", "歷年"],
+        author: "陳貴通",
+        replies: 0,
+        views: 60,
+        createdAt: "2026-02-16",
+        lastReplyAt: "2026-02-16 20:35",
+        lastReplyBy: "陳貴通",
+        attachments: [
+            "./assets/analytical_chem/first/2016_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2017_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2018_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2019_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2020_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2021_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2023_analytical_chem_1.pdf",
+            "./assets/analytical_chem/first/2024_first_midterm_exam_solutions.pdf"
+        ]
     }
 ];

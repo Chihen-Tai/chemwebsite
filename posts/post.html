@@ -69,9 +69,10 @@
 
     <script>
       (function () {
+        const ver = String(Date.now());
         const targets = [
-          "../src/data.js?v=1",
-          "../src/post.js?v=1"
+          `../src/data.js?v=${encodeURIComponent(ver)}`,
+          `../src/post.js?v=${encodeURIComponent(ver)}`
         ];
 
         const showErr = (src) => {
