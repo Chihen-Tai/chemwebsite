@@ -200,14 +200,14 @@ window.POSTS = [
         lastReplyAt: "2026-02-16 20:35",
         lastReplyBy: "陳貴通",
         attachments: [
-            "./assets/analytical_chem/first/2016_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2017_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2018_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2019_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2020_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2021_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2023_analytical_chem_1.pdf",
-            "./assets/analytical_chem/first/2024_first_midterm_exam_solutions.pdf"
+            "./assets/analytical_chem/analytical1/first/2016_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2017_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2018_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2019_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2020_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2021_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2023_analytical_chem_1.pdf",
+            "./assets/analytical_chem/analytical1/first/2024_first_midterm_exam_solutions.pdf"
         ]
     }
 ];
