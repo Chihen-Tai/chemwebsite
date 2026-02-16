@@ -93,11 +93,14 @@
   // ---------- Meta ----------
   const categoryName =
     ({
-      mid: "期中",
+      mid1: "期中一",
+      mid2: "期中二",
       final: "期末",
-      grad: "研究所",
       notes: "筆記",
-      solution: "解答",
+      // backward compatibility for old data
+      mid: "期中一",
+      grad: "期中二",
+      solution: "期中二",
     }[post.category] || "綜合討論");
 
   const statusText =

@@ -9,7 +9,7 @@ window.POSTS = [
     {
         id: "qm-ntu-2024-final",
         status: "pin",           // "pin" | "hot" | "new" | ""
-        category: "final",       // "mid" | "final" | "grad" | "notes" | "solution"
+        category: "final",       // "mid1" | "mid2" | "final" | "notes"
         department: "物理系",
         subject: "量子力學",
         title: "【期末】台大 2024 量子力學期末考古題（含題目掃描）",
@@ -28,7 +28,7 @@ window.POSTS = [
     {
         id: "ss-112-mid-solution",
         status: "hot",
-        category: "solution",
+        category: "mid2",
         department: "物理系",
         subject: "固態物理",
         title: "【解答】固態 112 上 期中（K-space / Brillouin zone）詳解",
@@ -60,7 +60,7 @@ window.POSTS = [
     {
         id: "oc-usc-2023-grad",
         status: "new",
-        category: "grad",
+        category: "mid2",
         department: "化學所",
         subject: "有機化學",
         title: "【研究所】USC 2023 Organic Qual Exam（反應機構整理）",
@@ -92,7 +92,7 @@ window.POSTS = [
     {
         id: "genchem-mid-2025",
         status: "new",
-        category: "mid",
+        category: "mid1",
         department: "化學系",
         subject: "普通化學",
         title: "【期中】普通化學 2025 上學期重點題型整理",
@@ -124,7 +124,7 @@ window.POSTS = [
     {
         id: "seminar-surface-chem",
         status: "hot",
-        category: "grad",
+        category: "mid2",
         department: "化學所",
         subject: "表面化學",
         title: "【研究所】表面化學 Seminar 重點與考古題方向",

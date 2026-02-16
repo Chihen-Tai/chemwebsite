@@ -17,7 +17,6 @@
             q: "",
             department: "",
             subject: "",
-            sort: "latest",
             page: 1,
             perPage: 8
         };
@@ -181,12 +180,6 @@
             rebuildSubjectOptions("");
         }
 
-        $("sort")?.addEventListener("change", (e) => {
-            state.sort = e.target.value;
-            state.page = 1;
-            render();
-        });
-
         // Tabs
         document.querySelectorAll(".tab").forEach(t => {
             t.addEventListener("click", () => {
@@ -236,17 +229,8 @@
             // primary sort by pin
             copy.sort((a, b) => (a.status === "pin" ? -1 : 0) - (b.status === "pin" ? -1 : 0));
 
-            // secondary sort
-            if (state.sort === "replies") {
-                copy.sort((a, b) => (b.replies || 0) - (a.replies || 0));
-            } else if (state.sort === "hot") {
-                copy.sort((a, b) => (b.views || 0) - (a.views || 0));
-            } else if (state.sort === "newest") {
-                copy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            } else {
-                // latest reply
-                copy.sort((a, b) => new Date((b.lastReplyAt || "").replace(" ", "T")) - new Date((a.lastReplyAt || "").replace(" ", "T")));
-            }
+            // secondary sort: newest first
+            copy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             return copy;
         }
 
