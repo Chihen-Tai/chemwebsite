@@ -245,7 +245,7 @@
 
   const defaultBody = `
     <h2>簡介</h2>
-    <p>這裡是 <b>${escapeHtml(post.author || "—")}</b> 整理的資料頁。</p>
+    <p>留白</p>
 
     <div class="callout">
       <p class="muted" style="margin:0;">
