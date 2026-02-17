@@ -8,6 +8,7 @@
         const categoryMap = {
             mid1: "期中一",
             mid2: "期中二",
+            mid3: "期中三",
             final: "期末",
             notes: "筆記",
             quiz: "小考",

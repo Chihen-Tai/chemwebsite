@@ -256,4 +256,274 @@ window.POSTS = [
         lastReplyBy: "黃暄益",
         attachment: "./assets/inorganic_chem/mid2_note/inorganic_chem_mid2_note_photos.pdf"
     }
+,
+{
+    "id": "organic1-auto-mid1-item-3c6lyg-20260217_030737",
+    "status": "new",
+    "category": "mid1",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中一】有機化學一 2022-2023（林俊成）",
+    "tags": [
+        "有機化學一",
+        "期中一",
+        "自動整理"
+    ],
+    "author": "林俊成",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "林俊成",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/112有機一(林俊成)/mid 1/mid 1_merged.pdf",
+        "./assets/organic_chemistry/organ_1/111有機一(林俊成)/111林俊成/有機一first exam.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid2-item-3c6lyg-20260217_030737",
+    "status": "new",
+    "category": "mid2",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中二】有機化學一 2022-2023（林俊成）",
+    "tags": [
+        "有機化學一",
+        "期中二",
+        "自動整理"
+    ],
+    "author": "林俊成",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "林俊成",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/112有機一(林俊成)/mid 2/mid 2_merged.pdf",
+        "./assets/organic_chemistry/organ_1/111有機一(林俊成)/111林俊成/有機一second exam.pdf",
+        "./assets/organic_chemistry/organ_1/111有機一(林俊成)/111林俊成/Ans/Ans for second exam.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-final-item-3c6lyg-20260217_030737",
+    "status": "new",
+    "category": "final",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期末】有機化學一 2022-2023（林俊成）",
+    "tags": [
+        "有機化學一",
+        "期末",
+        "自動整理"
+    ],
+    "author": "林俊成",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "林俊成",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/112有機一(林俊成)/final(偏難，都是CCL的ㄘㄨㄛˋ啦)/「112期末難題解析.pdf",
+        "./assets/organic_chemistry/organ_1/112有機一(林俊成)/final(偏難，都是CCL的ㄘㄨㄛˋ啦)/final(偏難，都是CCL的ㄘㄨㄛˋ啦)_merged.pdf",
+        "./assets/organic_chemistry/organ_1/112有機一(林俊成)/final(偏難，都是CCL的ㄘㄨㄛˋ啦)/「112期末答案卷.pdf",
+        "./assets/organic_chemistry/organ_1/112有機一(林俊成)/final(偏難，都是CCL的ㄘㄨㄛˋ啦)/「112期末答案卷(1).pdf",
+        "./assets/organic_chemistry/organ_1/111有機一(林俊成)/111林俊成/有機一third exam.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid1-item-2j3d3r-20260217_030737",
+    "status": "new",
+    "category": "mid1",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中一】有機化學一 2017-2021（陳建添）",
+    "tags": [
+        "有機化學一",
+        "期中一",
+        "自動整理"
+    ],
+    "author": "陳建添",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "陳建添",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/110有機一(陳建添)/1/題目卷.pdf",
+        "./assets/organic_chemistry/organ_1/110有機一(陳建添)/1/答案卷.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(陳建添)（化學系）/1 st/1 st_merged.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid2-item-2j3d3r-20260217_030737",
+    "status": "new",
+    "category": "mid2",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中二】有機化學一 2017-2021（陳建添）",
+    "tags": [
+        "有機化學一",
+        "期中二",
+        "自動整理"
+    ],
+    "author": "陳建添",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "陳建添",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/110有機一(陳建添)/2/題目卷.pdf",
+        "./assets/organic_chemistry/organ_1/110有機一(陳建添)/2/答案卷.pdf",
+        "./assets/organic_chemistry/organ_1/107有機一(陳建添)/期中第二次/期中第二次_merged.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(陳建添)（化學系）/2 nd/2 nd_merged.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid3-item-2j3d3r-20260217_030737",
+    "status": "new",
+    "category": "mid3",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中三】有機化學一 2017-2021（陳建添）",
+    "tags": [
+        "有機化學一",
+        "期中三",
+        "自動整理"
+    ],
+    "author": "陳建添",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "陳建添",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/110有機一(陳建添)/3/題目卷.pdf",
+        "./assets/organic_chemistry/organ_1/107有機一(陳建添)/期中第三次/期中第三次_merged.pdf",
+        "./assets/organic_chemistry/organ_1/107有機一(陳建添)/期中第四次/期中第四次_merged.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(陳建添)（化學系）/3 rd/3 rd_merged.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-final-item-2j3d3r-20260217_030737",
+    "status": "new",
+    "category": "final",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期末】有機化學一 2017（陳建添）",
+    "tags": [
+        "有機化學一",
+        "期末",
+        "自動整理"
+    ],
+    "author": "陳建添",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "陳建添",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/106有機一(陳建添)（化學系）/final/final_merged.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid1-item-3dil4y-20260217_030737",
+    "status": "new",
+    "category": "mid1",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中一】有機化學一 2017-2020（汪炳鈞）",
+    "tags": [
+        "有機化學一",
+        "期中一",
+        "自動整理"
+    ],
+    "author": "汪炳鈞",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "汪炳鈞",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/一/109上第一次期中.pdf",
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/一/一_merged.pdf",
+        "./assets/organic_chemistry/organ_1/108有機一(汪炳鈞)/1/1_merged.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(汪炳鈞)（非化學系）/汪炳鈞_106有機期中一.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid2-item-3dil4y-20260217_030737",
+    "status": "new",
+    "category": "mid2",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中二】有機化學一 2017-2020（汪炳鈞）",
+    "tags": [
+        "有機化學一",
+        "期中二",
+        "自動整理"
+    ],
+    "author": "汪炳鈞",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "汪炳鈞",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/二/109上第二次期中.pdf",
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/二/二_merged.pdf",
+        "./assets/organic_chemistry/organ_1/108有機一(汪炳鈞)/2/2_merged.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(汪炳鈞)（非化學系）/汪炳鈞_106有機期中二.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-mid3-item-3dil4y-20260217_030737",
+    "status": "new",
+    "category": "mid3",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期中三】有機化學一 2017-2020（汪炳鈞）",
+    "tags": [
+        "有機化學一",
+        "期中三",
+        "自動整理"
+    ],
+    "author": "汪炳鈞",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "汪炳鈞",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/三/109上第三次期中.pdf",
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/三/三_merged.pdf",
+        "./assets/organic_chemistry/organ_1/108有機一(汪炳鈞)/3/3_merged.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(汪炳鈞)（非化學系）/汪炳鈞_106有機期中三.pdf"
+    ]
+},
+{
+    "id": "organic1-auto-final-item-3dil4y-20260217_030737",
+    "status": "new",
+    "category": "final",
+    "department": "化學系",
+    "subject": "有機化學一",
+    "title": "【期末】有機化學一 2017-2020（汪炳鈞）",
+    "tags": [
+        "有機化學一",
+        "期末",
+        "自動整理"
+    ],
+    "author": "汪炳鈞",
+    "replies": 0,
+    "views": 0,
+    "createdAt": "2026-02-17",
+    "lastReplyAt": "2026-02-17 00:00",
+    "lastReplyBy": "汪炳鈞",
+    "attachments": [
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/期末/109上期末.pdf",
+        "./assets/organic_chemistry/organ_1/109有機一(汪炳鈞)/期末/期末_merged.pdf",
+        "./assets/organic_chemistry/organ_1/108有機一(汪炳鈞)/期末考/期末考_merged.pdf",
+        "./assets/organic_chemistry/organ_1/106有機一(汪炳鈞)（非化學系）/汪炳鈞_106有機期末.pdf"
+    ]
+}
 ];

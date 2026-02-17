@@ -66,8 +66,21 @@
 
   function getAttachmentYear(path, fallbackYear) {
     const txt = String(path || "");
-    const m = txt.match(/(19|20)\d{2}/);
-    return m ? m[0] : (fallbackYear || "未標註");
+    const key = txt
+      .replace(/^\.\/+/, "")
+      .replace(/^\.\.\/+/, "")
+      .replace(/\\/g, "/");
+    const mapped = window.YEAR_MAP && window.YEAR_MAP[key];
+    if (mapped) return String(mapped);
+    const ad = txt.match(/(19|20)\d{2}/);
+    if (ad) return ad[0];
+    // 民國年（如 108、109、110）轉西元
+    const roc = txt.match(/(?:^|[^0-9])([1-2]\d{2})(?:[^0-9]|$)/);
+    if (roc) {
+      const n = Number(roc[1]);
+      if (n >= 100 && n <= 199) return String(n + 1911);
+    }
+    return fallbackYear || "未標註";
   }
 
   function getQuizAttachmentYear(path, fallbackYear) {
@@ -112,6 +125,7 @@
     ({
       mid1: "期中一",
       mid2: "期中二",
+      mid3: "期中三",
       final: "期末",
       notes: "筆記",
       quiz: "小考",

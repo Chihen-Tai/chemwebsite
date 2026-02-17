@@ -1,0 +1,15 @@
+file,year,suggested_category,confidence,score_mid1,score_mid2,score_final
+./test/1.jpg,unknown,unknown,0,0,0,0
+./test/112期末答案卷.pdf,2023,unknown,0,0,0,0
+./test/112期末答案卷(1).pdf,2023,unknown,0,0,0,0
+./test/112期末難題解析.pdf,2023,unknown,0,0,0,0
+./test/2.jpg,unknown,unknown,0,0,0,0
+./test/3.jpg,unknown,unknown,0,0,0,0
+./test/test_images_merged.pdf,unknown,unknown,0,0,0,0
+
+最後結果,數量
+mid1,0
+mid2,0
+final,0
+unknown,7
+total,7
