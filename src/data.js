@@ -258,7 +258,7 @@ window.POSTS = [
     }
 ,
 {
-    "id": "organic1-auto-mid1-item-3c6lyg-20260217_030737",
+    "id": "organic1-auto-mid1-item-3c6lyg-20260217_031943",
     "status": "new",
     "category": "mid1",
     "department": "化學系",
@@ -281,7 +281,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-mid2-item-3c6lyg-20260217_030737",
+    "id": "organic1-auto-mid2-item-3c6lyg-20260217_031943",
     "status": "new",
     "category": "mid2",
     "department": "化學系",
@@ -305,7 +305,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-final-item-3c6lyg-20260217_030737",
+    "id": "organic1-auto-final-item-3c6lyg-20260217_031943",
     "status": "new",
     "category": "final",
     "department": "化學系",
@@ -331,7 +331,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-mid1-item-2j3d3r-20260217_030737",
+    "id": "organic1-auto-mid1-item-2j3d3r-20260217_031943",
     "status": "new",
     "category": "mid1",
     "department": "化學系",
@@ -355,7 +355,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-mid2-item-2j3d3r-20260217_030737",
+    "id": "organic1-auto-mid2-item-2j3d3r-20260217_031943",
     "status": "new",
     "category": "mid2",
     "department": "化學系",
@@ -380,7 +380,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-mid3-item-2j3d3r-20260217_030737",
+    "id": "organic1-auto-mid3-item-2j3d3r-20260217_031943",
     "status": "new",
     "category": "mid3",
     "department": "化學系",
@@ -400,17 +400,16 @@ window.POSTS = [
     "attachments": [
         "./assets/organic_chemistry/organ_1/110有機一(陳建添)/3/題目卷.pdf",
         "./assets/organic_chemistry/organ_1/107有機一(陳建添)/期中第三次/期中第三次_merged.pdf",
-        "./assets/organic_chemistry/organ_1/107有機一(陳建添)/期中第四次/期中第四次_merged.pdf",
         "./assets/organic_chemistry/organ_1/106有機一(陳建添)（化學系）/3 rd/3 rd_merged.pdf"
     ]
 },
 {
-    "id": "organic1-auto-final-item-2j3d3r-20260217_030737",
+    "id": "organic1-auto-final-item-2j3d3r-20260217_031943",
     "status": "new",
     "category": "final",
     "department": "化學系",
     "subject": "有機化學一",
-    "title": "【期末】有機化學一 2017（陳建添）",
+    "title": "【期末】有機化學一 2017-2018（陳建添）",
     "tags": [
         "有機化學一",
         "期末",
@@ -423,11 +422,12 @@ window.POSTS = [
     "lastReplyAt": "2026-02-17 00:00",
     "lastReplyBy": "陳建添",
     "attachments": [
+        "./assets/organic_chemistry/organ_1/107有機一(陳建添)/期中第四次/期中第四次_merged.pdf",
         "./assets/organic_chemistry/organ_1/106有機一(陳建添)（化學系）/final/final_merged.pdf"
     ]
 },
 {
-    "id": "organic1-auto-mid1-item-3dil4y-20260217_030737",
+    "id": "organic1-auto-mid1-item-3dil4y-20260217_031943",
     "status": "new",
     "category": "mid1",
     "department": "化學系",
@@ -452,7 +452,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-mid2-item-3dil4y-20260217_030737",
+    "id": "organic1-auto-mid2-item-3dil4y-20260217_031943",
     "status": "new",
     "category": "mid2",
     "department": "化學系",
@@ -477,7 +477,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-mid3-item-3dil4y-20260217_030737",
+    "id": "organic1-auto-mid3-item-3dil4y-20260217_031943",
     "status": "new",
     "category": "mid3",
     "department": "化學系",
@@ -502,7 +502,7 @@ window.POSTS = [
     ]
 },
 {
-    "id": "organic1-auto-final-item-3dil4y-20260217_030737",
+    "id": "organic1-auto-final-item-3dil4y-20260217_031943",
     "status": "new",
     "category": "final",
     "department": "化學系",

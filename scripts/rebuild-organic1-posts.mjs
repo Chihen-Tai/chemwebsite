@@ -46,8 +46,8 @@ function extractYearAd(p) {
 }
 
 function categoryOf(p) {
-  if (/\/final|期末|學期考|期末考|final exam/i.test(p)) return "final";
-  if (/mid\s*3|mid_3|\/(3|3 rd)\/|第三次|第四次|期中三|\/(三)\/|third/i.test(p)) return "mid3";
+  if (/\/final|\/fin(\/|$)|期末|學期考|期末考|final exam|mid\s*4|mid_4|\/(4|4 th)\/|第四次|期中四|\/(四)\/|fourth/i.test(p)) return "final";
+  if (/mid\s*3|mid_3|\/(3|3 rd)\/|第三次|期中三|\/(三)\/|third/i.test(p)) return "mid3";
   if (/mid\s*2|mid_2|\/(2|2 nd)\/|第二次|期中二|\/(二)\/|second/i.test(p)) return "mid2";
   if (/mid\s*1|mid_1|\/(1|1 st)\/|第一次|期中一|\/(一)\/|first/i.test(p)) return "mid1";
   if (/ans\//i.test(p)) return "mid2";

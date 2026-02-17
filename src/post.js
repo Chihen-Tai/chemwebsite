@@ -39,6 +39,26 @@
     if (label) el.setAttribute("aria-label", label);
   }
 
+  function renderCategoryLink(el, category, label) {
+    if (!el) return;
+    const c = String(category || "").trim();
+    const map = { mid1: 1, mid2: 1, mid3: 1, final: 1, notes: 1, quiz: 1, other: 1 };
+    if (!map[c]) return;
+    el.setAttribute("role", "link");
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("aria-label", label || "回列表看同分類");
+    el.style.cursor = "pointer";
+    const href = `../index.html?tab=${encodeURIComponent(c)}`;
+    const go = () => { location.href = href; };
+    el.addEventListener("click", go);
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        go();
+      }
+    });
+  }
+
   // post.html 在 /posts/，把 attachment 轉成可用路徑（並 encode）
   function resolveAttachmentPath(path) {
     if (!path) return "";
@@ -153,6 +173,7 @@
   if (postTimeEl) postTimeEl.textContent = post.createdAt || "—";
   const heroCategoryEl = $("heroCategory");
   if (heroCategoryEl) heroCategoryEl.textContent = categoryName;
+  renderCategoryLink(heroCategoryEl, post.category, `查看 ${categoryName} 分類`);
   const heroSubjectEl = $("heroSubject");
   renderSearchLink(heroSubjectEl, post.subject, `搜尋科目 ${post.subject || ""}`, "未設定科目");
   const chipStatusEl = $("chipStatus");

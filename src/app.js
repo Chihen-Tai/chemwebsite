@@ -69,12 +69,26 @@
         }
         q?.addEventListener("input", (e) => setQuery(e.target.value));
 
+        function setTab(tab) {
+            const next = tab && categoryMap[tab] ? tab : "all";
+            state.tab = next;
+            state.page = 1;
+            document.querySelectorAll(".tab").forEach((x) => {
+                x.classList.toggle("active", x.dataset.tab === next);
+            });
+            render();
+        }
+
         // init query from URL: /index.html?q=xxx
         const initParams = new URLSearchParams(window.location.search);
         const initQ = (initParams.get("q") || "").trim();
+        const initTab = (initParams.get("tab") || "").trim();
         if (initQ) {
             state.q = initQ;
             if (q) q.value = initQ;
+        }
+        if (initTab && (initTab === "all" || categoryMap[initTab])) {
+            state.tab = initTab;
         }
 
         // ---- Add modal ----
@@ -185,12 +199,11 @@
         // Tabs
         document.querySelectorAll(".tab").forEach(t => {
             t.addEventListener("click", () => {
-                document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
-                t.classList.add("active");
-                state.tab = t.dataset.tab;
-                state.page = 1;
-                render();
+                setTab(t.dataset.tab);
             });
+        });
+        document.querySelectorAll(".tab").forEach((x) => {
+            x.classList.toggle("active", x.dataset.tab === state.tab);
         });
 
         // ---- Utils ----
@@ -262,7 +275,7 @@
 
                 return `
             <div class="row ${isClickable ? "row-clickable" : ""}" style="--row-index:${idx};" data-href="${href}" role="${isClickable ? "link" : ""}" tabindex="${isClickable ? "0" : "-1"}" aria-label="${isClickable ? `開啟 ${escapeHtml(p.title)}` : ""}">
-              <div><span class="badge">${escapeHtml(categoryText)}</span></div>
+              <div><span class="badge category-tag" role="button" tabindex="0" aria-label="切換到分類 ${escapeHtml(categoryText)}" data-category="${escapeHtml(p.category || "all")}">${escapeHtml(categoryText)}</span></div>
 
               <div class="title">
                 <a href="${href}" title="${escapeHtml(p.title)}">
@@ -333,6 +346,25 @@
                         e.preventDefault();
                         e.stopPropagation();
                         setQuery(author);
+                    }
+                });
+            });
+
+            elRows.querySelectorAll(".category-tag").forEach((tag) => {
+                const category = tag.getAttribute("data-category");
+                if (!category) return;
+
+                tag.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setTab(category);
+                });
+
+                tag.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setTab(category);
                     }
                 });
             });
