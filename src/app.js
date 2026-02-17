@@ -5,11 +5,13 @@
             console.warn("window.POSTS is not an array. Did src/data.js load correctly?");
         }
 
-        const statusMap = {
-            pin: { text: "置頂", cls: "pin" },
-            hot: { text: "精華", cls: "hot" },
-            new: { text: "NEW", cls: "new" },
-            "": { text: "一般", cls: "" }
+        const categoryMap = {
+            mid1: "期中一",
+            mid2: "期中二",
+            final: "期末",
+            notes: "筆記",
+            quiz: "小考",
+            other: "其他"
         };
 
         const state = {
@@ -26,7 +28,6 @@
         const elRows = $("rows");
         const elPager = $("pager");
         const elYear = $("year");
-        const elTopAuthors = $("topAuthors");
         const q = $("q");
         const aboutBtn = $("aboutBtn");
         const aboutModal = $("aboutModal");
@@ -246,8 +247,7 @@
             if (!elRows) return;
             elRows.innerHTML = items.map((p, idx) => {
 
-                const st = statusMap[p.status ?? ""] || statusMap[""];
-                const badgeCls = ["badge", st.cls].filter(Boolean).join(" ");
+                const categoryText = categoryMap[p.category] || "其他";
                 const tags = (p.tags || [])
                     .slice(0, 4)
                     .map(t => `<span class="tag">#${escapeHtml(t)}</span>`)
@@ -261,7 +261,7 @@
 
                 return `
             <div class="row ${isClickable ? "row-clickable" : ""}" style="--row-index:${idx};" data-href="${href}" role="${isClickable ? "link" : ""}" tabindex="${isClickable ? "0" : "-1"}" aria-label="${isClickable ? `開啟 ${escapeHtml(p.title)}` : ""}">
-              <div><span class="${badgeCls}">${st.text}</span></div>
+              <div><span class="badge">${escapeHtml(categoryText)}</span></div>
 
               <div class="title">
                 <a href="${href}" title="${escapeHtml(p.title)}">
@@ -370,23 +370,6 @@
             });
         }
 
-        function renderTopAuthors() {
-            if (!elTopAuthors) return;
-            const map = new Map();
-            for (const p of posts) map.set(p.author, (map.get(p.author) || 0) + 1);
-
-            const top = [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
-            elTopAuthors.innerHTML = top.map(([name, count]) => `
-          <div class="creator">
-            <div class="avatar">${escapeHtml(name).slice(0, 1).toUpperCase()}</div>
-            <div class="info">
-              <b>${escapeHtml(name)}</b>
-              <small>最近整理 ${count} 篇</small>
-            </div>
-          </div>
-        `).join("") || `<div class="note">還沒有資料，先去新增幾篇吧。</div>`;
-        }
-
         function render() {
             const filtered = filterPosts();
             const sorted = sortPosts(filtered);
@@ -402,13 +385,11 @@
           `;
                 }
                 if (elPager) elPager.innerHTML = "";
-                if (elTopAuthors) elTopAuthors.innerHTML = "";
                 return;
             }
 
             renderRows(pageItems);
             renderPager(pages);
-            renderTopAuthors();
 
             if (pageItems.length === 0) {
                 if (elRows) {
