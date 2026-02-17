@@ -176,8 +176,8 @@ window.POSTS = [
         author: "Urban",
         replies: 0,
         views: 30,
-        createdAt: "2026-02-16",
-        lastReplyAt: "2026-02-16 21:15",
+        createdAt: "2026-02-17",
+        lastReplyAt: "2026-02-17 11:26",
         lastReplyBy: "Urban",
         attachments: [
             "./assets/analytical_chem/analytical2/assistant/l15_l16_20210506.pdf",
@@ -205,8 +205,8 @@ window.POSTS = [
         author: "Urban",
         replies: 0,
         views: 25,
-        createdAt: "2026-02-16",
-        lastReplyAt: "2026-02-16 21:18",
+        createdAt: "2026-02-17",
+        lastReplyAt: "2026-02-17 11:28",
         lastReplyBy: "Urban",
         attachments: [
             "./assets/analytical_chem/analytical2/quiz/class21/quiz_01.pdf",
