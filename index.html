@@ -192,9 +192,25 @@
         </div>
     </div>
 
-    <!-- data first, then app -->
-    <script src="./src/data.js"></script>
-    <script src="./src/app.js"></script>
+    <script>
+      (function () {
+        const ver = String(Date.now());
+        const targets = [
+          `./src/data.js?v=${encodeURIComponent(ver)}`,
+          `./src/app.js?v=${encodeURIComponent(ver)}`
+        ];
+        let i = 0;
+        const next = () => {
+          if (i >= targets.length) return;
+          const s = document.createElement("script");
+          s.src = targets[i++];
+          s.onload = next;
+          s.onerror = next;
+          document.body.appendChild(s);
+        };
+        next();
+      })();
+    </script>
 </body>
 
 </html>
