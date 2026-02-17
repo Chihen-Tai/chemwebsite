@@ -64,6 +64,23 @@
     return decodeURIComponent(seg[seg.length - 1] || "附件");
   }
 
+  function getAttachmentYear(path, fallbackYear) {
+    const txt = String(path || "");
+    const m = txt.match(/(19|20)\d{2}/);
+    return m ? m[0] : (fallbackYear || "未標註");
+  }
+
+  function getQuizAttachmentYear(path, fallbackYear) {
+    const direct = getAttachmentYear(path, "");
+    if (direct) return direct;
+    const cls = String(path || "").match(/class(\d{2})/i);
+    if (cls) {
+      const n = Number(cls[1]);
+      if (Number.isFinite(n)) return String(2000 + n - 1);
+    }
+    return fallbackYear || "未標註";
+  }
+
   // year（可有可無）
   const yearEl = $("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -136,31 +153,74 @@
   const postYear = /^\d{4}/.test(String(post.createdAt || ""))
     ? String(post.createdAt).slice(0, 4)
     : "未知年份";
-  const attachmentCards = hasAttachment
-    ? resolvedAttachments
-      .map((path, idx) => {
-        const name = escapeHtml(getFileName(path));
-        const panelId = `pdfInline${idx + 1}`;
-        return `
-          <div class="attachment-block">
-            <div class="callout attachment-card">
-              <div class="attachment-title">附件 ${idx + 1}：<b>${name}</b></div>
-              <div class="attachment-year">年份：<b>${escapeHtml(postYear)}</b></div>
-              <div class="attachment-actions">
-                <a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟</a>
-                <a class="a" href="${path}" download>⬇️ 下載</a>
-              </div>
-              <button class="pdf-summary pdf-toggle-inline" type="button" data-target="${panelId}" aria-expanded="false">
-                ⤢ 點擊預覽 / 收合
-              </button>
-              <div class="pdf-inline-panel" id="${panelId}" hidden>
-                <iframe class="pdf-inline-frame" src="${path}#view=FitH" title="PDF ${idx + 1}"></iframe>
-              </div>
-            </div>
+  const isQuizPost =
+    String(post.id || "").toLowerCase().includes("quiz") ||
+    (post.tags || []).some((t) => String(t || "").toLowerCase() === "quiz");
+
+  function renderAttachmentCard(path, idx, forceYear = "") {
+    const name = escapeHtml(getFileName(path));
+    const panelId = `pdfInline${idx + 1}`;
+    const isPdf = /\.pdf($|[?#])/i.test(path);
+    const attachmentYear = forceYear || getAttachmentYear(path, postYear);
+    return `
+      <div class="attachment-block">
+        <div class="callout attachment-card">
+          <div class="attachment-title">附件 ${idx + 1}：<b>${name}</b></div>
+          <div class="attachment-year">年份：<b>${escapeHtml(attachmentYear)}</b></div>
+          <div class="attachment-actions">
+            <a class="a" href="${path}" target="_blank" rel="noopener">📄 開啟</a>
+            <a class="a" href="${path}" download>⬇️ 下載</a>
           </div>
-        `;
-      })
-      .join("")
+          ${isPdf ? `
+          <button class="pdf-summary pdf-toggle-inline" type="button" data-target="${panelId}" aria-expanded="false">
+            ⤢ 點擊預覽 / 收合
+          </button>
+          <div class="pdf-inline-panel" id="${panelId}" hidden>
+            <iframe class="pdf-inline-frame" src="${path}#view=FitH" title="PDF ${idx + 1}"></iframe>
+          </div>` : `
+          <div class="pdf-summary" style="opacity:.78;">此檔案格式不支援站內預覽（請用開啟/下載）</div>`}
+        </div>
+      </div>
+    `;
+  }
+
+  const attachmentCards = hasAttachment
+    ? (isQuizPost
+      ? (() => {
+        const groups = new Map();
+        resolvedAttachments.forEach((path, idx) => {
+        const y = getQuizAttachmentYear(path, postYear);
+          if (!groups.has(y)) groups.set(y, []);
+          groups.get(y).push({ path, idx });
+        });
+        const years = [...groups.keys()].sort((a, b) => {
+          const na = Number(a);
+          const nb = Number(b);
+          if (Number.isFinite(na) && Number.isFinite(nb)) return nb - na;
+          if (Number.isFinite(na)) return -1;
+          if (Number.isFinite(nb)) return 1;
+          return String(b).localeCompare(String(a), "zh-Hant");
+        });
+        return years
+          .map((y, i) => {
+            const panelId = `yearPanel${i + 1}`;
+            const list = groups.get(y) || [];
+            const open = i === 0;
+            const cards = list.map(({ path, idx }) => renderAttachmentCard(path, idx, String(y))).join("");
+            return `
+              <section class="quiz-year-group callout">
+                <button class="year-toggle" type="button" data-target="${panelId}" aria-expanded="${open ? "true" : "false"}">
+                  ${escapeHtml(String(y))} 年（${list.length} 份）
+                </button>
+                <div class="year-panel" id="${panelId}" ${open ? "" : "hidden"}>
+                  ${cards}
+                </div>
+              </section>
+            `;
+          })
+          .join("");
+      })()
+      : resolvedAttachments.map((path, idx) => renderAttachmentCard(path, idx)).join(""))
     : "";
 
   // ---------- Body ----------
@@ -209,6 +269,18 @@
     postBodyEl.addEventListener("click", (e) => {
       const target = e.target;
       if (!(target instanceof Element)) return;
+      const yearBtn = target.closest(".year-toggle");
+      if (yearBtn) {
+        const targetId = yearBtn.getAttribute("data-target");
+        if (!targetId) return;
+        const panel = document.getElementById(targetId);
+        if (!panel) return;
+        const willOpen = panel.hasAttribute("hidden");
+        if (willOpen) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+        yearBtn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        return;
+      }
       const btn = target.closest(".pdf-toggle-inline");
       if (!btn) return;
       const panelId = btn.getAttribute("data-target");

@@ -245,6 +245,34 @@ html.dark .hero-cloud {
     margin: 14px 0 22px;
 }
 
+.quiz-year-group {
+    margin: 14px 0 18px;
+    padding: 10px 12px 12px;
+}
+
+.year-toggle {
+    width: 100%;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+}
+
+.year-toggle:hover {
+    background: var(--subtle);
+    transform: translateY(-1px);
+}
+
+.year-panel {
+    margin-top: 10px;
+}
+
 .attachment-card {
     margin: 0;
 }
