@@ -168,7 +168,7 @@ window.POSTS = [
     {
         id: "analytical-chem-2-assistant-materials",
         status: "new",
-        category: "mid2",
+        category: "other",
         department: "化學系",
         subject: "分析化學二",
         title: "【期中二】分析化學二助教教材整理（Urban）",
@@ -197,7 +197,7 @@ window.POSTS = [
     {
         id: "analytical-chem-2-quiz-archive",
         status: "new",
-        category: "mid2",
+        category: "quiz",
         department: "化學系",
         subject: "分析化學二",
         title: "【期中二】分析化學二 Quiz 題庫整理（Urban）",

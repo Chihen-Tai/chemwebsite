@@ -114,6 +114,8 @@
       mid2: "期中二",
       final: "期末",
       notes: "筆記",
+      quiz: "小考",
+      other: "其他",
       // backward compatibility for old data
       mid: "期中一",
       grad: "期中二",
